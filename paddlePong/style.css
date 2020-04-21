@@ -1,0 +1,35 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+canvas {
+  background: #eee;
+  display: block;
+  margin: auto;
+}
+
+.wrapButt {
+  text-align: center;
+  padding-top: 15px;
+}
+
+.but {
+  /* position: relative; */
+  top: 70%;
+  color: white;
+  background-color: black;
+  font-family: monospace;
+  padding: 20px 30px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.bottom {
+  /* position: auto; */
+  font-size: 25px;
+  bottom: auto;
+  text-align: center;
+  font-family: monospace;
+  padding-top: 400px;
+}
