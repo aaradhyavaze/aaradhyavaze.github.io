@@ -1,6 +1,7 @@
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  background('black')
+  // background('black')
+  frameRate(60)
 }
 
 
@@ -49,22 +50,27 @@ function setup() {
 
 
 // perlin black and white terrain generator
-let start = 1
-let moo = start
-let increment = 0.01
+// the problem with it drawing to the canvas repeatedly was that the background was declared in the setup and not in draw()
+
+let start = 0
+let increment = 0.02
 function draw() {
-  // background(50);
+  background('black');
   beginShape();
-  // vertex(0, windowHeight);
+  vertex(0, windowHeight);
   noFill();
-  for (let x = 0; x < windowWidth; x+= 10) {
+  let xoff = start
+  for (let x = 100; x < windowWidth - 100; x+= 10) {
     stroke(255);
-    vertex(x, map(noise(moo), 0, 1, 0, windowHeight))
-    moo += increment
+    let y1 =  map(noise(xoff), 0, 1, 0, windowHeight) + map(sin(xoff), 0, 1, -50, 50)
+    let y2 = noise(xoff)*windowHeight
+    // vertex(x, y2)
+    vertex(x, y1)
+    xoff += increment
   }
-  // vertex(windowWidth, windowHeight)
+  vertex(windowWidth, windowHeight)
   // noLoop();
   endShape();
-  start += 0.001
+  start += 0.01
 
 }
