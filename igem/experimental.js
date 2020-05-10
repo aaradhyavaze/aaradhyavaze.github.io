@@ -4,9 +4,9 @@
 // Borkar is the parent of all E-coli, antibiotics and random bacteria
 // and also compromised genetic material
 
-
-// i need an index of population size
-// otherwise this thing will explode
+//glitches in the matrix (fix them later)
+//1. when secret carrying robust replicates, it's child does not have secret
+// fixed! lol this cascades quickly
 
 class Borkar {
   constructor(x, y) {
@@ -114,7 +114,7 @@ class Ecoli extends Borkar {
   }
   replicate() {
     if (this.walkCounter % this.lifespan == 0) {
-      borks.push(new Ecoli(this.pos.x, this.pos.y))
+      borks.push(new Ecoli(this.pos.x + random(-30, 30) , this.pos.y + random(-30, 30)))
       // this causes quite a bit of overhead
       numEcoli += 1
     }
@@ -123,8 +123,9 @@ class Ecoli extends Borkar {
     //not every ecoli gets to replicate
     // say 30% die before they get to replicate?
     if (this.walkCounter % (this.lifespan - 100) == 0 ){
-      if (Math.random() < 0.3) {
+      if (Math.random() < 0.1) {
         console.log('top secret compromised')
+        borks.push(new TopSecret(this.pos.x, this.pos.y))
         //releasy thy genes and die
         // TODO: release genetic material
         for (let i = 0; i < borks.length; i++) {
@@ -132,7 +133,7 @@ class Ecoli extends Borkar {
             borks.splice(i, 1)
             numEcoli -= 1
             break;
-            // please don't add to overload
+            // hopefully less overhead..
 
           }
         }
@@ -181,7 +182,7 @@ class Antibiotic extends Borkar {
   }
 
   die() {
-    // you're just here for the alibi
+    // you're just here for the alibi, kiddo
   }
 }
 
@@ -220,6 +221,9 @@ class Robust extends Borkar {
     // fill(255, 255, 0, 70)
     if (this.rollover){
       fill(255, 255, 0, 200)
+      if (this.secretCode){
+        fill(255, 0, 0, 200)
+      }
     }
     ellipse(this.pos.x, this.pos.y, 2*this.radius-this.offset, 2*this.radius-this.offset)
     endShape();
@@ -238,9 +242,110 @@ class Robust extends Borkar {
 
   replicate() {
     //
+    if (this.walkCounter % this.lifespan == 0) {
+      //also make the replicate a little far apart..
+      let child = new Robust(this.pos.x+ random(-30, 30), this.pos.y+ random(-30, 30))
+      if (this.secretCode == true){
+      child.secretCode = true;
+    }
+      // borks.push(new Robust(this.pos.x+ random(-30, 30), this.pos.y+ random(-30, 30)))
+      borks.push(child)
+      // this causes quite a bit of overhead
+      numRobusts += 1
+    }
   }
 
   die() {
     //
+    if (this.walkCounter % (this.lifespan - 100) == 0 ){
+      if (Math.random() < 0.1) {
+        for (let i = 0; i < borks.length; i++) {
+          if (borks[i].identity() == 2) {
+            borks.splice(i, 1)
+            numRobusts -= 1
+            break;
+            // hopefully less overhead..
+
+          }
+        }
+      }
+    }
   }
+}
+
+
+class TopSecret extends Borkar {
+  identity() {
+    return 3
+  }
+
+  hajimefy() {
+    //like a dna strand
+    // beginShape();
+    // noFill();
+    // for (let i = 0; i < 1.5*PI; i+= 0.1){
+    //   this.radius = 30
+    //   vertex(this.pos.x + 7*cos(2*i - 50), this.pos.y + 10*i - 20)
+    //   vertex(this.pos.x - 7*cos(2*i - 50), this.pos.y + 10*i - 20)
+    //
+    // }
+    // // vertex(0, 0)
+    // // vertex(100, 0)
+    // endShape();
+    // beginShape();
+    // fill(0, 200, 100, 100)
+    // if (this.rollover){
+    //   fill(0, 200, 100, 200)
+    // }
+    // ellipse(this.pos.x, this.pos.y, 20, 20)
+    // endShape();
+
+    push();
+    stroke(0)
+    fill(0, 200, 50, 0)
+    if (this.rollover){
+      fill(0, 200, 50, 200)
+    }
+    // wrap translations and rotations inside push/pop
+    // translate, then rotate! it was getting offset lmao
+    // also translate origin to center of rect each time
+    ellipseMode(CENTER)
+    translate(this.pos.x, this.pos.y)
+    rotate(this.tilt)
+    // for (let i = 0; i < 1.5*PI; i+= 0.1){
+    //   vertex(10*i, 10*i)
+    //   // vertex(7*cos(2*i - 50), 10*i - 20)
+    //
+    // }
+    ellipse(0, 0, 20, 20)
+    beginShape();
+    stroke(255)
+    noFill();
+    for (let i = 0; i < 1.5*PI; i+= 0.3){
+      vertex(7*cos(2*i - 50), 10*i - 20)
+      // vertex(-7*cos(2*i - 50),10*i - 20)
+
+    }
+    endShape();
+    pop();
+  }
+
+  walk() {
+    //same as antibiotic
+    if (this.walkCounter % this.antibiostep == 0) {
+    let direction = p5.Vector.random2D()
+    direction.mult(1)
+    this.pos.add(direction)
+    }
+    this.walkCounter += 1
+  }
+
+  replicate() {
+    //don't.
+  }
+
+  die() {
+    //uhm
+  }
+
 }
