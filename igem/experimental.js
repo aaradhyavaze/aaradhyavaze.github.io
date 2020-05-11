@@ -7,6 +7,14 @@
 //glitches in the matrix (fix them later)
 //1. when secret carrying robust replicates, it's child does not have secret
 // fixed! lol this cascades quickly
+//2. antibiotic and robust => robust dies.
+// fixed.
+//3. first orange makes ecoli orange, then orange ecoli makes orange borkteria red
+//
+//4.
+
+
+// replica should have same state of conjubaby and secretCode.
 
 class Borkar {
   constructor(x, y) {
@@ -20,11 +28,13 @@ class Borkar {
     this.walkCounter = 0
     this.bacteriastep = 20
     this.antibiostep = 5
-    // this.lifespan = Math.floor(Math.random()*3600 + 3600)
+    this.lifespan = Math.floor(Math.random()*1800 + 3600)
     //for during testing:
-    this.lifespan = Math.floor(Math.random()*100 + 200)
+    // this.lifespan = Math.floor(Math.random()*100 + 200)
     this.mogrify = random(1, 3)
     this.secretCode = false
+    this.conjubaby = false;
+    //conjubaby is F+ BTW :p
   }
 
 
@@ -80,6 +90,9 @@ class Ecoli extends Borkar {
   hajimefy() {
     beginShape();
     fill(50, 100, 200, 50)
+    if (this.conjubaby) {
+      fill(150, 255, 0, 50)
+    }
     for (let i = 0; i < this.sides+1; i++){
       this.radius = 30 + sin(i)**2*10
       vertex(this.pos.x + this.radius*sin(i*2*PI/this.sides),
@@ -92,6 +105,7 @@ class Ecoli extends Borkar {
     beginShape();
     fill(50, 200, 200, 100)
 
+    //keep blue center identity intact.
     if (this.rollover){
       fill(50, 255, 255, 150)
     }
@@ -114,7 +128,11 @@ class Ecoli extends Borkar {
   }
   replicate() {
     if (this.walkCounter % this.lifespan == 0) {
-      borks.push(new Ecoli(this.pos.x + random(-30, 30) , this.pos.y + random(-30, 30)))
+      let colibaby = new Ecoli(this.pos.x + random(-30, 30) , this.pos.y + random(-30, 30))
+      if (this.conjubaby == true) {
+        colibaby.conjubaby = true;
+      }
+      borks.push(colibaby)
       // this causes quite a bit of overhead
       numEcoli += 1
     }
@@ -123,7 +141,7 @@ class Ecoli extends Borkar {
     //not every ecoli gets to replicate
     // say 30% die before they get to replicate?
     if (this.walkCounter % (this.lifespan - 100) == 0 ){
-      if (Math.random() < 0.1) {
+      if (Math.random() < 0.05) {
         console.log('top secret compromised')
         borks.push(new TopSecret(this.pos.x, this.pos.y))
         //releasy thy genes and die
@@ -204,9 +222,13 @@ class Robust extends Borkar {
   hajimefy() {
     beginShape();
     fill(255,255, 0, 100)
-    if (this.secretCode){
+    if (this.conjubaby){
+      fill(255, 150, 0, 100)
+    }
+    if (this.secretCode) {
       fill(255, 0, 0, 100)
     }
+
     for (let i = 0; i < this.sides+1; i++){
       this.radius = 30 + sin(i)**2*10
       // vertex(this.pos.x + this.radius*sin(i*2*PI/this.sides),
@@ -245,6 +267,9 @@ class Robust extends Borkar {
     if (this.walkCounter % this.lifespan == 0) {
       //also make the replicate a little far apart..
       let child = new Robust(this.pos.x+ random(-30, 30), this.pos.y+ random(-30, 30))
+      if (this.conjubaby == true) {
+        child.conjubaby = true;
+      }
       if (this.secretCode == true){
       child.secretCode = true;
     }
@@ -258,7 +283,8 @@ class Robust extends Borkar {
   die() {
     //
     if (this.walkCounter % (this.lifespan - 100) == 0 ){
-      if (Math.random() < 0.1) {
+      //five percent drate atm
+      if (Math.random() < 0.05) {
         for (let i = 0; i < borks.length; i++) {
           if (borks[i].identity() == 2) {
             borks.splice(i, 1)
