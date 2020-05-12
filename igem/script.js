@@ -15,7 +15,8 @@ let populationCap = 25
 let interactive = true;
 
 function preload() {
-  logo = loadImage("https://user-images.githubusercontent.com/48019866/81642071-2652cd80-9440-11ea-883f-80b55f2507d3.png")
+//   logo = loadImage("https://user-images.githubusercontent.com/48019866/81642071-2652cd80-9440-11ea-883f-80b55f2507d3.png")
+     logo = loadImage("logo.png")
 }
 
 function setup() {
