@@ -364,11 +364,11 @@ function randomInit() {
   }
 }
 
-function goryDetails() {
-  alert("this \n is")
-}
+// function goryDetails() {
+//   alert("this \n is")
+// }
 
-let currentPage = 3;
+let currentPage = 0;
 let introMicrobes = []
 
 function draw() {
