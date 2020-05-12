@@ -28,7 +28,7 @@ class Borkar {
     this.walkCounter = 0
     this.bacteriastep = 20
     this.antibiostep = 5
-    this.lifespan = Math.floor(Math.random()*1800 + 3600)
+    this.lifespan = Math.floor(Math.random()*900 + 1800)
     //for during testing:
     // this.lifespan = Math.floor(Math.random()*100 + 200)
     this.mogrify = random(1, 3)
@@ -40,6 +40,8 @@ class Borkar {
 
   over() {
     //check rollover
+    //add interactive switch
+    if (interactive) {
     if (mouseX>this.pos.x - this.offset
        && mouseX < this.pos.x + this.offset
     && mouseY > this.pos.y - this.offset &&
@@ -50,10 +52,12 @@ class Borkar {
   else {
     this.rollover = false
   }
-  }
+}
+}
 
   pressed() {
     //for when mouse is pressed
+    if (interactive) {
     if (mouseX>this.pos.x - this.offset
        && mouseX < this.pos.x + this.offset
     && mouseY > this.pos.y - this.offset &&
@@ -62,16 +66,19 @@ class Borkar {
 
     }
   }
+}
   released() {
+    if (interactive){
     // this caused quite some trouble XD
     this.dragging = false;
     // this.rollover = false;
   }
+}
 
   update() {
     // run this only when dragging is true, which
     // in turn is true when pressed and rollover is true
-
+    if (interactive) {
     if(this.dragging) {
       let mouse = createVector(mouseX, mouseY)
       let vecoff = p5.Vector.sub(mouse, this.pos)
@@ -79,6 +86,7 @@ class Borkar {
     }
   }
 
+}
 }
 
 
@@ -187,9 +195,10 @@ class Antibiotic extends Borkar {
   }
   walk() {
     // lets just go with random vector for now
+    //ved update: mobility factor inc by 4
     if (this.walkCounter % this.antibiostep == 0) {
     let direction = p5.Vector.random2D()
-    direction.mult(1)
+    direction.mult(4)
     this.pos.add(direction)
     }
     this.walkCounter += 1
@@ -358,9 +367,10 @@ class TopSecret extends Borkar {
 
   walk() {
     //same as antibiotic
+    //ved update: increase step size by 4 times
     if (this.walkCounter % this.antibiostep == 0) {
     let direction = p5.Vector.random2D()
-    direction.mult(1)
+    direction.mult(4)
     this.pos.add(direction)
     }
     this.walkCounter += 1
