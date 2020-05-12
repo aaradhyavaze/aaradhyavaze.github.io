@@ -15,8 +15,9 @@ let populationCap = 25
 let interactive = true;
 
 function preload() {
-//   logo = loadImage("https://user-images.githubusercontent.com/48019866/81642071-2652cd80-9440-11ea-883f-80b55f2507d3.png")
-     logo = loadImage("logo.png")
+  logo = loadImage("logo.png")
+  //when uploading to github:
+  // logo = loadImage("https://user-images.githubusercontent.com/48019866/81642071-2652cd80-9440-11ea-883f-80b55f2507d3.png")
 }
 
 function setup() {
@@ -66,11 +67,12 @@ function keyPressed() {
   if (keyCode == TAB) {
     currentPage = 5
   }
-
+  //
   // for resetting the sim:
-  if (keyCode === ESCAPE) {
-    borks = []
-  }
+  // if (keyCode === ESCAPE) {
+  //   borks = []
+  // }
+
 }
 
 let cheat = ""
@@ -90,7 +92,7 @@ function keyTyped() {
   if (cheat.length > 2) {
     cheat = ""
   }
-  console.log(cheat)
+  // console.log(cheat)
 }
 
 function mousePressed() {
@@ -366,7 +368,7 @@ function goryDetails() {
   alert("this \n is")
 }
 
-let currentPage = 0;
+let currentPage = 3;
 let introMicrobes = []
 
 function draw() {
@@ -463,6 +465,7 @@ if (currentPage == 3) {
   text(`this genetic material can be taken up by random bacteria, and can gain Resistance`, width/2, 120)
   textSize(13)
   text( `drag the released genetic code over any random bacteria and hold for a bit`, width/2, 140)
+  textSize(15)
   text(`Enter to continue`, width/2, 930)
   // text(`Alt to initialise random population, Esc to clear the sim`, width/2, 950)
 
@@ -494,6 +497,7 @@ if (currentPage === 4) {
   text(`Solution part 2: a sugar based kill switch incorporated only in our E-coli`, width/2, 120)
   textSize(13)
   text( `it degrades the DNA and kills the bacteria`, width/2, 140)
+  textSize(15)
   text(`Enter to run the simulation!`, width/2, 930)
   text(`Alt to initialise random population, cheat code to clear the sim`, width/2, 950)
 
