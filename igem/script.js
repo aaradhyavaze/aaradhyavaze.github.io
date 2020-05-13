@@ -374,7 +374,8 @@ function populationControl() {
   // }
 }
 
-let currentPage = 5;
+let currentPage = 0;
+//make this 0 before pushing to github
 //DRAW  IS  HERE  FOR  GODS  SAKE
 
 
