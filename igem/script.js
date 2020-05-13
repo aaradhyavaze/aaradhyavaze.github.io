@@ -469,7 +469,7 @@ if (currentPage == 3) {
   textAlign(CENTER)
   text(`one more problem: sometimes when E-Coli dies, it releases its genetic code in the environment! ` , width/2, 70)
   textSize(13)
-  text( `wait for it to die or create one with left arrow`, width/2, 90)
+  text( `wait for it to die or create one with right arrow`, width/2, 90)
   textSize(15)
   text(`this genetic material can be taken up by random bacteria, and can gain Resistance`, width/2, 120)
   textSize(13)
