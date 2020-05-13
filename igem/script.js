@@ -299,56 +299,33 @@ function sudoku() {
 }//for end.
   // i should probably put this in sudoku, instead of executing another function
   // also yay this seems to work!
-  if (numEcoli > populationCap) {
-    for (let i = 0 ; i < borks.length; i ++) {
-      if (borks[i].identity() === 0) {
-        borks.splice(i, 1)
-        // numEcoli -= 1
-        break
-      }
-      console.log('not an ecoli yet.')
-    }
-  }
-  if (numRobusts > populationCap) {
-    for (let i = 0; i < borks.length; i ++) {
-      if (borks[i].identity() === 2) {
-        borks.splice(i, 1)
-        // numRobusts -= 1;
-        break;
-      }
-    }
-  }
+  // if (numEcoli > populationCap) {
+  //   for (let i = 0 ; i < borks.length; i ++) {
+  //     if (borks[i].identity() === 0) {
+  //       borks.splice(i, 1)
+  //       // numEcoli -= 1
+  //       break
+  //     }
+  //     console.log('not an ecoli yet.')
+  //   }
+  // }
+  // if (numRobusts > populationCap) {
+  //   for (let i = 0; i < borks.length; i ++) {
+  //     if (borks[i].identity() === 2) {
+  //       borks.splice(i, 1)
+  //       // numRobusts -= 1;
+  //       break;
+  //     }
+  //   }
+  // }
 }
 
 
-
-    // console.log(borks[i].pos.sub(borks[i+1].pos).mag())
-  //   if (mouseX>this.pos.x - this.offset
-  //      && mouseX < this.pos.x + this.offset
-  //   && mouseY > this.pos.y - this.offset &&
-  // mouseY < this.pos.y + this.offset
+function bhijubhalize() {
+  console.log(numEcoli)
+}
 
 
-let sides = 50
-let radius;
-let widthmap = 50
-
-
-//make functions for better visualisation of numbers and
-// for intro to the UI
-// message = "this just happened"
-// messageTimer = 0
-// function bhijubhalize() {
-// // something like in a game
-// // when an event happens a text comes and fades out
-// fill(255)
-// text(message, width - 100, 50)
-// if (messageTimer == 60) {
-//   message = ""
-//   messageTimer = 0
-// }
-// messageTimer += 1
-// }
 function randomInit() {
   let ec = Math.floor(Math.random()*5 + 5)
   for (let i = 0; i< ec; i++) {
@@ -357,19 +334,51 @@ function randomInit() {
     borks.push(new Ecoli(random(width/4, 3*width/4), random(height/4, 3*height/4)))
     borks.push(new Antibiotic(random(width/4, 3*width/4), random(height/4, 3*height/4)))
     borks.push(new Antibiotic(random(width/4, 3*width/4), random(height/4, 3*height/4)))
-    borks.push(new Robust(random(width/4, 3*width/4), random(height/4, 3*height/4)))
+    //fix needed: alt also makes F+ bacteria
+    let randrobu = new Robust(random(width/4, 3*width/4), random(height/4, 3*height/4))
+    if (Math.random() < 0.5) {
+      randrobu.conjubaby = true
+    }
+    borks.push(randrobu)
     // numEcoli += 1
     // numAntibiotics += 2
     // numRobusts += 1
   }
 }
 
-// function goryDetails() {
-//   alert("this \n is")
-// }
 
-let currentPage = 0;
-let introMicrobes = []
+function populationControl() {
+  // if (numEcoli > populationCap) {
+  //   console.log('bahasdfk')
+  //   for (let i = 0 ; i < borks.length; i ++) {
+  //     if (borks[i].identity() === 0) {
+  //       borks.splice(i, 1)
+  //       // numEcoli -= 1
+  //       break
+  //     }
+  //     console.log('not an ecoli yet.')
+  //   }
+  // }
+  // if (numRobusts > populationCap) {
+  //   for (let i = 0; i < borks.length; i ++) {
+  //     if (borks[i].identity() === 2) {
+  //       borks.splice(i, 1)
+  //       // numRobusts -= 1;
+  //       break;
+  //     }
+  //   }
+  // }
+}
+
+let currentPage = 5;
+//DRAW  IS  HERE  FOR  GODS  SAKE
+
+
+
+graphColi = [0]
+graphAnti = [0]
+graphRobust = [0]
+updateCounter = 0
 
 function draw() {
   background(0)
@@ -554,17 +563,101 @@ if (currentPage === 4) {
       }
     }
 
-    //   if (i.secretCode === true) {
-    //     numResistant += 1
-    //   }
-    //   if (i.conjubaby === true && i.identity() === 0) {
-    //     coliconju += 1
-    //   }
-    //   if (i.conjubaby === true && i.identity() === 2) {
-    //     borkconju += 1
-    //   }
-    //
-    // }
+    //had to add it in draw()
+    //dayum
+    if (numEcoli > populationCap) {
+      for (let i = 0 ; i < borks.length; i ++) {
+        if (borks[i].identity() === 0) {
+          borks.splice(i, 1)
+          // numEcoli -= 1
+          break
+        }
+        // console.log('not an ecoli yet.')
+      }
+    }
+    if (numRobusts > populationCap) {
+      for (let i = 0; i < borks.length; i ++) {
+        if (borks[i].identity() === 2) {
+          borks.splice(i, 1)
+          // numRobusts -= 1;
+          break;
+        }
+      }
+    }
+
+    //i guess i should cap the number of antibiotics as well
+    if (numAntibiotics > populationCap*3) {
+      for (let i = 0; i < borks.length; i++) {
+        if (borks[i].identity() === 1) {
+          borks.splice(i, 1)
+          break;
+        }
+      }
+    }
+
+    if (updateCounter % 5 === 0) {
+      if (graphColi.length != 1 || numEcoli != 0) {
+      graphColi.push(numEcoli)
+      }
+      if (graphAnti.length != 1 || numAntibiotics != 0) {
+      graphAnti.push(numAntibiotics)
+      }
+      if (graphRobust.length != 1 || numRobusts != 0) {
+        graphRobust.push(numRobusts)
+      }
+    }
+
+    updateCounter += 1
+    // graphColi.push(numEcoli)
+    //ved update: add line graph (live updating graph)
+    //graphing starts here:
+    let colix = []
+    let antix = []
+    let robux = []
+    for (let i = 0; i<= 300; i+= 300/((graphColi.length - 1))) {
+      colix.push(i)
+    }
+    for (let i = 0; i<= 300; i+= 300/((graphAnti.length - 1))) {
+      antix.push(i)
+    }
+    for (let i = 0; i <= 300; i+= 300/((graphRobust.length - 1))) {
+      robux.push(i)
+    }
+
+    beginShape();//ecoli
+    noFill()
+    strokeWeight(2)
+    stroke(50, 255, 255, 200)
+    for (let i = 0; i < colix.length; i++) {
+      vertex(colix[i], 255 - graphColi[i]*10)
+    }
+    endShape();
+
+    beginShape();//antibiotic
+    noFill()
+    strokeWeight(2)
+    stroke(255, 50, 50, 200)
+    for (let i = 0; i < antix.length; i++) {
+      vertex(antix[i], 765 - graphAnti[i]*10)
+    }
+    endShape();
+
+    beginShape()//borkteria
+    noFill()
+    strokeWeight(2)
+    stroke(255,255, 0, 150)
+    for (let i = 0; i < robux.length; i++) {
+      vertex(robux[i], 510 - graphRobust[i]*10)
+    }
+    endShape();
+
+
+
+
+
+
+
+
     fill(255)
     textFont('monospace')
     strokeWeight(0.3)
