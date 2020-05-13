@@ -55,7 +55,11 @@ function keyPressed() {
 
   }
   if (keyCode === ALT) {
+    //ved update: reset graph with alt.
     borks = []
+    graphColi = [0]
+    graphAnti = [0]
+    graphRobust = [0]
     randomInit();
   }
   if (keyCode === RETURN) {
@@ -370,8 +374,8 @@ function populationControl() {
   // }
 }
 
-let currentPage = 0;
-//DRAW  IS  HERE  FOR  location  SAKE
+let currentPage = 5;
+//DRAW  IS  HERE  FOR  GODS  SAKE
 
 
 
@@ -443,7 +447,7 @@ function draw() {
     textSize(15)
     text( `2. And then it can conjugate with an F- bacteria (yellow) and give IT the code that kills antibiotic`, width/2, 220)
     textSize(13)
-    text( `Bring F+ E-Coli close to yellow bacteria (takes a couple of tries). If it becomes red, it is now Resistant`, width/2, 240)
+    text( `Bring F+ E-Coli close to yellow bacteria. If it becomes red, it is now Resistant`, width/2, 240)
     textSize(15)
     text(`Enter to continue`, width/2, 930)
 
@@ -469,7 +473,7 @@ if (currentPage == 3) {
   textAlign(CENTER)
   text(`one more problem: sometimes when E-Coli dies, it releases its genetic code in the environment! ` , width/2, 70)
   textSize(13)
-  text( `wait for it to die or create one with the right arrow`, width/2, 90)
+  text( `wait for it to die or create one with left arrow`, width/2, 90)
   textSize(15)
   text(`this genetic material can be taken up by random bacteria, and can gain Resistance`, width/2, 120)
   textSize(13)
@@ -624,12 +628,13 @@ if (currentPage === 4) {
       robux.push(i)
     }
 
+    line(300, 0, 300, height)
     beginShape();//ecoli
     noFill()
     strokeWeight(2)
     stroke(50, 255, 255, 200)
     for (let i = 0; i < colix.length; i++) {
-      vertex(colix[i], 255 - graphColi[i]*10)
+      vertex(colix[i], height/4 - graphColi[i]*10)
     }
     endShape();
 
@@ -638,7 +643,7 @@ if (currentPage === 4) {
     strokeWeight(2)
     stroke(255, 50, 50, 200)
     for (let i = 0; i < antix.length; i++) {
-      vertex(antix[i], 765 - graphAnti[i]*10)
+      vertex(antix[i], 3*height/4 - graphAnti[i]*10)
     }
     endShape();
 
@@ -647,7 +652,7 @@ if (currentPage === 4) {
     strokeWeight(2)
     stroke(255,255, 0, 150)
     for (let i = 0; i < robux.length; i++) {
-      vertex(robux[i], 510 - graphRobust[i]*10)
+      vertex(robux[i], 2*height/4 - graphRobust[i]*10)
     }
     endShape();
 
@@ -664,11 +669,11 @@ if (currentPage === 4) {
     textSize(14)
     stroke(0)
     textAlign(CENTER)
-    text(` E.Coli: ${numEcoli}, F+ : ${Math.round(coliconju/numEcoli*100)}%`, width/2, height-70)
-    text(` Antibiotics: ${numAntibiotics}`, width/2, height-50)
-    text(` Random borkteria: ${numRobusts}, F+ : ${Math.round(borkconju/numRobusts*100)} %`, width/2, height - 30)
+    text(` E.Coli: ${numEcoli}, F+ : ${Math.round(coliconju/numEcoli*100)}%`, 150, height/4 + 25)
+    text(` Antibiotics: ${numAntibiotics}`, 150, 3*height/4 + 25)
+    text(` Random borkteria: ${numRobusts}, F+ : ${Math.round(borkconju/numRobusts*100)} %`, 150, 2*height/4 + 25)
     fill(255, 100, 50, 200)
-    text(` Resistant: ${Math.round(numResistant/numRobusts*100)}%`, width/2, height - 10)
+    text(` Resistant: ${Math.round(numResistant/numRobusts*100)}%`, 150, height - 25)
     // bhijubhalize();
   }
 }
