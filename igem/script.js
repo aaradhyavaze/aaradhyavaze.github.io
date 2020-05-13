@@ -370,8 +370,8 @@ function populationControl() {
   // }
 }
 
-let currentPage = 5;
-//DRAW  IS  HERE  FOR  GODS  SAKE
+let currentPage = 0;
+//DRAW  IS  HERE  FOR  location  SAKE
 
 
 
