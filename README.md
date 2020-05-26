@@ -3,9 +3,9 @@ sunshine
 
 to view a simulation in action, type aaradhyavaze.github.io/folderName/
 
-except a library
-that ain't not nothin
+so mostly none of these have instructions
 
-i made these for myself so they don't have any instructions
+there's usually clicky stuff and rest in console
 
-feel free to fork and play around with source though!
+and usually enter key does something (wait was it l?)
+
