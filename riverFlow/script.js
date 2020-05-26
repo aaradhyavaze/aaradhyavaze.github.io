@@ -89,8 +89,9 @@ function regress() {
         const f = x => tf.pow(x, 3).mul(a).add(tf.square(x).mul(b)).add(tf.mul(x, c)).add(d)
         const loss = (pred, label) => (pred.sub(label).square().mean())
 
-        const learningRate = 0.05
-        const optimizer = tf.train.sgd(learningRate)
+        const learningRate = 0.003
+//         const optimizer = tf.train.sgd(learningRate)
+        const optimizer = tf.train.adam(learningRate)
         for (let i = 0; i< 10; i++) {
         optimizer.minimize(() => loss(f(xs), ys))
       }
