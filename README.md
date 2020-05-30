@@ -1,11 +1,17 @@
-# aaradhyavaze.github.io
-sunshine
+# sunshine!
 
-to view a simulation in action, type aaradhyavaze.github.io/folderName/
+i make simulations of stuff
 
-so mostly none of these have instructions
+## nookabnabna
 
-there's usually clicky stuff and rest in console
+see those folders above? to see a sim in action: 
 
-and usually enter key does something (wait was it l?)
+```html
+aaradhyavaze.github.io/folderName/
+```
+## contributing
 
+make a pull request! for something major, open an issue to discuss
+## open source
+
+<3
