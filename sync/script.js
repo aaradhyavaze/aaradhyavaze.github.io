@@ -91,6 +91,7 @@ function setup() {
 
 function keyPressed() {
   if (keyCode === UP_ARROW) fireflies.push(new Firefly(mouseX, mouseY))
+  if (keyCode === ENTER) fireflies = []
 }
 
 function synchronize() {
