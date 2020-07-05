@@ -4,22 +4,38 @@
 
 //right now, get the heart sound to load
 
-
-let mic;
+function preload() {
+  h1 = loadSound('hea1.mp3')
+}
 
 function setup() {
-  createCanvas(200, 200);
-  mic = new p5.AudioIn();
-  mic.start();
+  createCanvas(500, 500)
+  button = createButton('play')
+  // amp = new p5.Amplitude(0.7);
+  mic = new p5.AudioIn(() => console.log('audio error'));
+  // mic.start();
+  button.mousePressed(() => {
+    if (!h1.isPlaying()) {
+      h1.play()
+      button.html('pos')
+    }
+    else {
+      h1.pause()
+      button.html("play")
+    }
+  })
+
 }
 
 function draw() {
-  background(0);
-  let vol = mic.getLevel();
-  stroke(255);
-  fill(175);
-  ellipse(100, 100, 200, 1 + vol * 200);
+  noFill()
+  background(255, 255, 255)
+  stroke(mic.getLevel()*1000, 0, 75)
+  ellipse(width/2, height/2, 450, (50 + (mic.getLevel()*2000)))
+  // strokeWeight(40 + (amp.getLevel()*50))
+  // tval = mic.getLevel();
 }
+
 
 // i don need some kind of sound synthesis
 // emphasise the bass
