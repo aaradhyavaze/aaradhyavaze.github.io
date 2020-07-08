@@ -34,7 +34,7 @@ let r = 1
 // let zo = (lo) => ((createVector((p.x + lo.x)/2, (p.y + lo.y)/2)))
 let zo = (lo) => (p5.Vector.lerp(p, lo, 1/amt))
 function draw() {
-  stroke(150, 150, 200, 170)
+  stroke(50, 150, 200, 170)
   point(p.x, p.y)
   stroke(255)
   ver.map(x => x.be())
