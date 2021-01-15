@@ -1,0 +1,101 @@
+/* @import url(https://fonts.googleapis.com/css?family=Poiret+One); */
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+39+Text&display=swap');
+ .for-demo {
+    min-width: 400px;
+    max-width: 400px;
+    margin: 80px auto;
+}
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+.minimal-container {
+    -webkit-transition: all 250ms ease-out 250ms;
+    -moz-transition: all 250ms ease-out 250ms;
+    -o-transition: all 250ms ease-out 250ms;
+    transition: all 250ms ease-out 250ms;
+}
+.minimal-container {
+    height: 165px;
+    background-color: rgba(235, 235, 235, 0.1);
+    padding: 17px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.minimal-input {
+    -webkit-transition: all 125ms ease-out 125ms;
+    -moz-transition: all 125ms ease-out 125ms;
+    -o-transition: all 125ms ease-out 125ms;
+    transition: all 125ms ease-out 125ms;
+}
+.minimal-input::-webkit-input-placeholder {
+    color: #bdc3c7;
+}
+.minimal-input:-moz-placeholder {
+    color: #bdc3c7;
+}
+.minimal-input::-moz-placeholder {
+    color: #bdc3c7;
+}
+.minimal-input:-ms-input-placeholder {
+    color: #bdc3c7;
+}
+.minimal-input {
+    border: 0;
+    border-bottom: 1px solid #3498db;
+    outline: none;
+    width: 100%;
+    text-align: center;
+    /* font-family:'Poiret One', cursive; */
+    font-family: 'Libre Barcode 39 Text', cursive;
+    font-size: 26px;
+    background-color: transparent;
+    color: #2c3e50;
+}
+.button-container {
+    padding-top: 35px;
+}
+.minimal-button {
+    -webkit-transition: all 125ms ease-out 125ms;
+    -moz-transition: all 125ms ease-out 125ms;
+    -o-transition: all 125ms ease-out 125ms;
+    transition: all 125ms ease-out 125ms;
+}
+.minimal-button {
+    border: 0;
+    background: transparent;
+    /* font-family:'Poiret One', cursive; */
+    font-family: 'Roboto', cursive;
+    /* font-family: 'Libre Barcode 39 Text', cursive; */
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+    color: #2c3e50;
+}
+.minimal-button:hover {
+    color: #3498db;
+    cursor: pointer;
+}
+.filled {
+    border-bottom: 1px dotted rgba(52, 152, 219, 0.2);
+}
+.required {
+    border-bottom: 1px solid #3498db;
+}
+
+.fade-out {
+    opacity: 0.0;
+}
+
+.blink {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {  
+  50% { opacity: 0.0; }
+}
